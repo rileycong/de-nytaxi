@@ -6,12 +6,9 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=ny_taxi
     volumes:
-      - ./ny_taxi_postgres_data:/var/lib/postgresql/data:rw
+      - "./ny_taxi_postgres_data:/var/lib/postgresql/data:rw"
     ports:
       - "5432:5432"
-    networks:
-      - pg-network
-
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -19,28 +16,4 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
       - "8080:80"
-    networks:
-      - pg-network
-
-  # run once to ingest data
-  taxi_ingest:
-    build: .
-    image: taxi_ingest:v002
-    command: 
-      - --user=root 
-      - --password=root
-      - --host=pgdatabase
-      - --port=5432
-      - --db=ny_taxi
-      - --table_name=yellow_taxi_trips
-      - --url=https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz
-    depends_on:
-      - pgdatabase      
-      - pgadmin
-    networks:
-      - pg-network
-
-networks:
-  pg-network:
-    driver: bridge
-    name: pg-network
+    
