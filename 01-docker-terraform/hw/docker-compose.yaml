@@ -4,11 +4,11 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=ny_taxi
-    volumes:
-      - ./ny_taxi_postgres_data:/var/lib/postgresql/data:rw
+      - POSTGRES_DB=ny_taxi_hw
+    # volumes:
+    #   - ./ny_taxi_postgres_data:/var/lib/postgresql/data:rw
     ports:
-      - "5432:5432"
+      - "5431:5432"
     networks:
       - pg-network
 
@@ -25,15 +25,15 @@ services:
   # run once to ingest data
   taxi_ingest:
     build: .
-    image: taxi_ingest:v002
+    image: taxi_ingest:hw
     command: 
       - --user=root 
       - --password=root
       - --host=pgdatabase
       - --port=5432
-      - --db=ny_taxi
-      - --table_name=yellow_taxi_trips
-      - --url=https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz
+      - --db=ny_taxi_hw
+      - --table_name=green_taxi_trips
+      - --url=https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz
     depends_on:
       - pgdatabase      
       - pgadmin
