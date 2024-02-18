@@ -17,12 +17,12 @@ def export_data_to_big_query(df: DataFrame, **kwargs) -> None:
 
     Docs: https://docs.mage.ai/design/data-loading#bigquery
     """
-    table_id = 'de-zoom-camp-411609.green_taxi.green_taxi_2019'
+    table_id = 'de-zoom-camp-411609.trips_data_all.green_taxi'
     config_path = path.join(get_repo_path(), 'io_config.yaml')
     config_profile = 'dev'
 
     BigQuery.with_config(ConfigFileLoader(config_path, config_profile)).export(
         df,
         table_id,
-        if_exists='replace',  # Specify resolution policy if table name already exists
+        if_exists='append',  # Specify resolution policy if table name already exists
     )
