@@ -9,6 +9,13 @@ sources:
       - name: yellow_taxi
       - name: green_taxi
 
+  - name: hw
+    database: de-zoom-camp-411609
+    schema: fhv
+
+    tables:
+      - name: fhv_2019
+
 models:
   - name: stg_yellow_taxi
     description: ""
