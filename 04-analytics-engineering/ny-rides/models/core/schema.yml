@@ -127,3 +127,52 @@ models:
       - name: payment_type_description
         data_type: string
         description: ""
+  
+  - name: fact_fhv_trips
+    description: >
+      For-Hire Vehicle (“FHV”) trip records include fields capturing the dispatching base license number and the pick-up date, time, and taxi zone location ID.
+      Each row represents a single trip in an FHV.
+    columns:
+      - name: tripid
+        data_type: string
+        description: ""
+
+      - name: dispatching_base_num
+        data_type: string
+        description: ""
+
+      - name: pickup_locationid
+        data_type: int64
+        description: ""
+
+      - name: pickup_borough
+        data_type: string
+        description: ""
+
+      - name: pickup_zone
+        data_type: string
+        description: ""
+
+      - name: dropoff_locationid
+        data_type: int64
+        description: ""
+
+      - name: dropoff_borough
+        data_type: string
+        description: ""
+
+      - name: dropoff_zone
+        data_type: string
+        description: ""
+
+      - name: pickup_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: dropoff_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: sharedride_flag
+        data_type: int64
+        description: "Indicates if the trip was a part of a shared ride chain. For shared trips, the value is 1. For non-shared rides, this value is 0."

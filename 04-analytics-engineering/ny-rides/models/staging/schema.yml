@@ -23,6 +23,11 @@ models:
       - name: tripid
         data_type: string
         description: ""
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
 
       - name: vendorid
         data_type: int64
@@ -35,10 +40,20 @@ models:
       - name: pickup_locationid
         data_type: int64
         description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zone_lookup')
+              severity: warn
 
       - name: dropoff_locationid
         data_type: int64
         description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zone_lookup')
+              severity: warn
 
       - name: pickup_datetime
         data_type: timestamp
@@ -99,6 +114,11 @@ models:
       - name: payment_type
         data_type: int64
         description: ""
+        tests:
+          - accepted_values:
+              values: "{{ var('payment_type_values') }}"
+              severity: warn
+              quote: false #for bigquery
 
       - name: payment_type_description
         data_type: string
@@ -208,11 +228,60 @@ models:
               severity: warn
               quote: false #for bigquery
 
-
       - name: payment_type_description
         data_type: string
         description: ""
 
+  - name: stg_fhv_2019
+    description: ""
+    columns:
+      - name: tripid
+        data_type: string
+        description: ""
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+
+      - name: dispatching_base_num
+        data_type: string
+        description: ""
+
+      - name: pickup_locationid
+        data_type: int64
+        description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zone_lookup')
+              severity: warn
+
+      - name: dropoff_locationid
+        data_type: int64
+        description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zone_lookup')
+              severity: warn
+
+      - name: pickup_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: dropoff_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: sharedride_flag
+        data_type: int64
+        description: ""
+        tests:
+          - accepted_values:
+              values: "{{ var('sr_flag_values') }}"
+              severity: warn
+              quote: false #for bigquery
 
 
 
