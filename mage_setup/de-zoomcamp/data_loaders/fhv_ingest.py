@@ -44,11 +44,10 @@ def load_data(*args, **kwargs):
     dfs = []
     
     for url in urls:
-        chunksize = 10000
-        chunks = pd.read_csv(url, sep=",", compression='gzip', dtype=taxi_dtypes, parse_dates=parse_dates, chunksize=chunksize)
+        
+        df = pd.read_csv(url, sep=",", compression='gzip', dtype=taxi_dtypes, parse_dates=parse_dates)
 
-        for i, chunk in enumerate(chunks):
-            dfs.append(chunk)
+        dfs.append(df)
 
         return pd.concat(dfs, ignore_index=True)
 
