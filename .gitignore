@@ -17,3 +17,4 @@ serving_dir
 *.json
 mage_data/
 data/
+lib/
