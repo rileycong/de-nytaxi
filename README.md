@@ -1,6 +1,6 @@
 # My Project's Overview
 
-<img src="images/nytaxi.png" />
+<img src="images/architecture/nytaxi.png" />
 
 
 
